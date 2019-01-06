@@ -1,0 +1,26 @@
+//Two Sum
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+
+最优解：使用HashMap可以时间复杂度到O(n):
+
+func twoSum(nums []int, target int) []int {
+    var tmpMap = make(map[int]int)
+    
+    for index, value := range nums{
+        tmpMap[value] = index
+    }
+    
+    for index, value := range nums{
+        if v, ok := tmpMap[target - value]; ok {
+            if index == v {
+                continue
+            }
+            return []int{index, v}
+        }
+    }
+    return []int{0, 0}
+}
+
+善于使用Map；
