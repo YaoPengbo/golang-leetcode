@@ -1,0 +1,87 @@
+//Reverse Integer
+
+Given a 32-bit signed integer, reverse digits of an integer.
+Example 1:
+
+Input: 123
+Output: 321
+
+Note:
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+
+
+func reverse(x int) int {
+    var isPos bool
+    if x >= 0 {
+        isPos = true;
+    }else {
+        isPos = false
+        x = -1 * x
+    }
+    
+    var result = 0
+    for ; x > 0 ; {
+        result = result * 10 + x % 10
+        if !isInt32(result){
+            return 0
+        }
+        x = x/10
+    }
+    
+    if !isPos {
+        result = -1 * result
+    }
+    
+    if !isInt32(result){
+        return 0
+    }
+    return result
+}
+
+
+/**
+func reverse(x int) int {
+    var err error
+    var result int
+    var isPos bool
+    if x >= 0 {
+        isPos = true;
+    }else {
+        isPos = false
+        x = -1 * x
+    }
+	str1 := fmt.Sprintf("%d", x)
+    str2 := reverseString(str1)
+    if isPos {
+        result, err = strconv.Atoi(str2)
+    }else{
+        result, err = strconv.Atoi("-" + str2)
+    }
+    
+    if err == nil && isInt32(result){
+        return result
+    }else {
+        return 0
+    }
+}
+
+
+func reverseString(s string) string {
+    runes := []rune(s)
+    for from, to := 0, len(runes)-1; from < to; from, to = from+1, to-1 {
+        runes[from], runes[to] = runes[to], runes[from]
+    }
+    return string(runes)
+}
+
+**/
+
+func isInt32(x int)bool{
+    if  x >= -2147483648 && x <= 2147483647{
+        return true
+    }else{
+        return false
+    }
+}
+
+
